@@ -44,7 +44,9 @@ export function parseVueTemplate(text: string): string {
   if (rawText.replace(/\s/g, '') === '') {
     return '';
   }
-  return rawText.replace(/ {10}/, '<template>') + '</template>';
+  return rawText
+    .replace(/\r/g, '') // remove CR from source code
+    .replace(/ {10}/, '<template>') + '</template>';
 }
 
 export function createUpdater(tsModule: T_TypeScript) {
